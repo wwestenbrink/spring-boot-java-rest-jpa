@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-asset-table
+      author: wwestenbrink
+      changes:
+        - createTable:
+            tableName: asset
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    unique: true
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: value
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create-asset-table-increment
+      author: wwestenbrink
+      changes:
+        - addAutoIncrement:
+            tableName: asset
+            columnName: id
+            columnDataType: bigint
+            startWith: 1
+            incrementBy: 1
+  - changeSet:
+      id: create-asset-table-indexes
+      author: wwestenbrink
+      changes:
+        - createIndex:
+            tableName: asset
+            indexName: idx_asset_name
+            columns:
+              - column:
+                  name: name
+                  type: varchar(64)
